@@ -35,9 +35,6 @@
   <header class="bg-[#D4EE26] p-6 flex flex-row gap-5 items-center justify-between">
     <div class="text-2xl font-semibold">Givingly</div>
     <div>
-      <input type="text" placeholder="Search for projects" name="search" id="search"
-        class="text-xl rounded-md p-1 px-3 outline-none" />
-    </div>
     <div class="hidden lg:block">
       <ul class="flex items-center gap-8 font-medium">
         <li><a href="../pages/login.php">Login</a></li>
