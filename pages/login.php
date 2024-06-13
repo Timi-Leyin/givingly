@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Givingly</title>
+    <title>Givingly | Login</title>
     <!-- TAILWINDCSS CONFIG START -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
@@ -51,16 +51,7 @@
         </div>
     </header>
     <main class="w-full overflow-hidden h-[89.1%] flex items-center justify-center">
-        <div class="w-1/2 p-20">
-            <h1 class="text-5xl font-semibold">Givingly</h1>
-            <p class="mt-3 text-3xl">Supporting great causes made easy</p>
-            <p class="mt-3 text-xl">We helped over 3,500 projects and causes. Sign in today and get your idea kicked off
-                or suuport others kick off their amazing projects</p>
-            <button class="bg-black text-white p-3 px-20 mt-3 rounded-md">Start Today</button>
-        </div>
-        <div class="w-1/2 p-20">
-            <img src="assets/images/hero.png" alt="A hand full of love" class="h-[98%]">
-        </div>
+        
     </main>
 </body>
 
