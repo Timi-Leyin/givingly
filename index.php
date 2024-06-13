@@ -56,7 +56,8 @@
             <p class="mt-3 text-3xl">Supporting great causes made easy</p>
             <p class="mt-3 text-xl">We helped over 3,500 projects and causes. Sign in today and get your idea kicked off
                 or suuport others kick off their amazing projects</p>
-            <button class="bg-black text-white p-3 px-20 mt-3 rounded-md">Start Today</button>
+            <a href="pages/signup.php"><button class="bg-black text-white p-3 px-20 mt-3 rounded-md">Start
+                    Today</button></a>
         </div>
         <div class="w-1/2 p-20">
             <img src="assets/images/hero.png" alt="A hand full of love" class="h-[98%]">
