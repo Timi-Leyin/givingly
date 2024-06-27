@@ -1,3 +1,48 @@
+<?php
+session_start();
+require_once ('../includes/db_connect.php');
+
+$error_message = "";
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  // Check if user already exists
+  $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+  $stmt->bind_param("s", $email);
+  $stmt->execute();
+  $stmt->store_result();
+
+  if ($stmt->num_rows > 0) {
+    $error_message = "User already exists";
+  } else {
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
+    $stmt->bind_param("ss", $email, $hashed_password);
+
+
+    if ($stmt->execute()) {
+
+      $_SESSION['email'] = $email;
+      $_SESSION['loggedin'] = true;
+
+      header("Location: home.php");
+      exit();
+    } else {
+      $error_message = "Error: " . $stmt->error;
+    }
+  }
+
+
+  $stmt->close();
+  $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +76,7 @@
 
 </head>
 
-<body class="bg-[#D4EE26] h-screen w-full oveflow-hidden">
+<body class="bg-[#D4EE26] h-screen w-full overflow-hidden">
   <header class="bg-[#D4EE26] p-6 flex flex-row gap-5 items-center justify-between">
     <div class="text-2xl font-semibold">Givingly</div>
     <div>
@@ -49,16 +94,21 @@
   <main class="w-full overflow-hidden h-[89.1%] flex items-center justify-center">
     <div class="w-1/3 bg-white h-5/6 rounded-lg p-5 flex flex-col items-center">
       <div class="text-2xl font-semibold">Givingly</div>
-      <form action="" class="mt-5 w-full flex flex-col items-center">
+      <form action="signup.php" method="POST" class="mt-5 w-full flex flex-col items-center">
+        <?php if (!empty($error_message)): ?>
+          <div class="bg-red-100 text-red-700 p-3 rounded-md mb-4 w-5/6">
+            <?php echo $error_message; ?>
+          </div>
+        <?php endif; ?>
         <div class="flex flex-col w-5/6">
-          <label for="email">email:</label>
-          <input type="email" name="email" type="email" placeholder="Enter email" class="p-3 rounded-md">
+          <label for="email">Email:</label>
+          <input type="email" name="email" placeholder="Enter email" class="p-3 rounded-md" required>
         </div>
         <div class="flex flex-col mt-5 w-5/6">
-          <label for="password">password:</label>
-          <input type="password" name="password" type="password" placeholder="Enter password" class="p-3 rounded-md">
+          <label for="password">Password:</label>
+          <input type="password" name="password" placeholder="Enter password" class="p-3 rounded-md" required>
         </div>
-        <button class="bg-black text-white p-3 w-5/6 rounded-md text-2xl mt-5">Submit</button>
+        <button class="bg-black text-white p-3 w-5/6 rounded-md text-2xl mt-5" type="submit">Submit</button>
       </form>
     </div>
   </main>
