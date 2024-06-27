@@ -1,3 +1,8 @@
+<?php
+require_once ('../includes/auth_guard.php');
+check_login();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +39,7 @@
 <body class="w-full overflow-auto">
   <header class="bg-[#D4EE26] p-6 flex flex-row gap-5 items-center justify-between fixed top-0 w-full z-10">
     <div class="text-2xl font-semibold">Givingly</div>
+
     <div>
       <input type="text" placeholder="Search for projects" name="search" id="search"
         class="text-xl rounded-md p-2 px-3 outline-none w-[600px]" />
@@ -42,7 +48,7 @@
       <ul class="flex items-center gap-8 font-medium text-xl">
         <li><a href="./home.php">Home</a></li>
         <li>My Projects</li>
-        <li>Profile</li>
+        <li><a href="logout.php">Logout</a></li>
         <div className="">
           <a href="pages/signup.php"><button class="bg-black text-white p-2 rounded-md ">
               Create project
@@ -52,6 +58,7 @@
     </div>
   </header>
   <main class="w-full relative mt-16 p-14">
+  <h1 class="text-3xl font-semibold">Welcome, <?php echo htmlspecialchars($_SESSION['email']); ?>!</h1>
     <h1 class="text-4xl font-semibold">Projects</h1>
     <div class="mt-8 flex flex-wrap justify-around">
       <div class="w-[400px] cursor-pointer m-10">
