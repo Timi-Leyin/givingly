@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- POPPINS FONT CONFIG STOP -->
 
   <!-- CSS IMPORT -->
-  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="../styles/index.css">
 
 </head>
 
