@@ -50,7 +50,7 @@ check_login();
         <li>My Projects</li>
         <li><a href="logout.php">Logout</a></li>
         <div className="">
-          <a href="pages/signup.php"><button class="bg-black text-white p-2 rounded-md ">
+          <a href="./create-project.php"><button class="bg-black text-white p-2 rounded-md ">
               Create project
             </button></a>
         </div>

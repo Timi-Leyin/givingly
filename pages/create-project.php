@@ -58,46 +58,32 @@ check_login();
       </ul>
     </div>
   </header>
-  <main class="w-full relative mt-16 p-14">
-    <div class="flex">
-        <div class="w-[50%]"><img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed"></div>
-        <div class="w-[50%] p-5">
-          <h1 class="text-3xl font-bold">Help us release a cookbook for parents and kids</h1>
-          <div class="mt-3">
-            by shindara@gmail.co
-          </div>
-          <div class="flex mt-5">
-            <div class="w-[50%] border-y-2 border-r-2 p-3">
-              <h3 class="text-xl font-bold">About project</h3>
-              <p class="mt-3 text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga accusamus quaerat reprehenderit architecto nulla esse ab cumque blanditiis beatae laborum, nostrum vero eius maxime. Labore voluptatem repudiandae magnam tenetur reiciendis?</p>
-            </div>
-            <div class="w-[50%] border-y-2 border-l-2 p-3">
-              <div class="flex justify-between">
-                <div class="p-3">
-                  <h6 class="font-black">Raised:</h6>
-                  <p class="text-xl">$2,500</p>
-                </div>
-                <div class="bg-[#D4EE26] p-3 rounded-lg">
-                  <h6 class="font-black">Goal:</h6>
-                  <p class="text-xl">$3,500</p>
-              </div>
-              </div>
-              <div class="mt-5 w-full bg-gray-200 h-[15px] rounded-xl">
-                <div class="w-[70%] bg-[#D4EE26] h-full rounded-xl"></div>
-              </div>
-              <div class="mt-5">
-              <i class="fa-solid fa-calendar-days"></i>18 days left
-              </div>
-            </div>
-          </div>
-          <button class="mt-3 bg-black p-3 text-white font-bold rounded-md">Fund this project</button>
-        </div>
-    </div>
-
-    <div>
-
-    </div>
+  <main class="w-full flex flex-col items-center justify-center mt-16 p-14">
+    <h1 class="text-3xl font-bold">Kick-off your project</h1>
+    <form class="w-full">
+      <div class="flex flex-col mt-5 gap-2">
+        <label for="name">Name of project:</label>
+        <input type="text" name="name" id="name" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3" placeholder="Build a cat shelter with us"/>
+      </div>
+      <div class="flex flex-col mt-5 gap-2">
+        <label for="goal">Add your goal:</label>
+        <input type="numer" name="goal" id="goal" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3" placeholder="20000"/>
+      </div>
+      <div class="flex flex-col mt-5 gap-2">
+        <label for="about">About your project</label>
+        <textarea name="name" id="name" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3 resize-none h-32" placeholder="Build a cat shelter with us"></textarea>
+      </div>
+      <div class="flex flex-col mt-5 gap-2">
+        <label for="date">Add your timeline</label>
+        <input type="date" name="date" id="date" class="outline-0 border-2 rounded-lg border-black p-3 w-[30%]"/>
+      </div>
+      <div class="flex flex-col mt-5 gap-2">
+        <label for="banner">Add project banner</label>
+        <input type="file" name="banner" id="banner" class="outline-0 border-2 rounded-lg border-black p-3 w-[30%]"/>
+      </div>
+      </div>
+      <button class="bg-black text-white p-2 rounded-md mt-3 w-[30%]">Submit</button>
+      </form>
   </main>
-</body>
-
+  </body>
 </html>
