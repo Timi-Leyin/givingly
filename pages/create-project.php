@@ -1,6 +1,7 @@
 <?php
 require_once ('../includes/auth_guard.php');
 check_login();
+require_once ('../includes/create-project.php');
 ?>
 
 <!DOCTYPE html>
@@ -58,20 +59,32 @@ check_login();
       </ul>
     </div>
   </header>
+  <?php if (isset($success)): ?>
+    <div class="bg-green-500 text-white p-4 rounded mb-4">
+        <?= htmlspecialchars($success) ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($error)): ?>
+    <div class="bg-red-500 text-white p-4 rounded mb-4">
+        <?= htmlspecialchars($error) ?>
+    </div>
+<?php endif; ?>
+
   <main class="w-full flex flex-col items-center justify-center mt-16 p-14">
     <h1 class="text-3xl font-bold">Kick-off your project</h1>
-    <form class="w-full">
+    <form class="w-full"  method="POST" enctype="multipart/form-data">
       <div class="flex flex-col mt-5 gap-2">
         <label for="name">Name of project:</label>
         <input type="text" name="name" id="name" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3" placeholder="Build a cat shelter with us"/>
       </div>
       <div class="flex flex-col mt-5 gap-2">
         <label for="goal">Add your goal:</label>
-        <input type="numer" name="goal" id="goal" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3" placeholder="20000"/>
+        <input type="nubmer" name="goal" id="goal" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3" placeholder="20000"/>
       </div>
       <div class="flex flex-col mt-5 gap-2">
         <label for="about">About your project</label>
-        <textarea name="name" id="name" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3 resize-none h-32" placeholder="Build a cat shelter with us"></textarea>
+        <textarea name="about" id="about" class="outline-0 border-2 rounded-lg border-black w-[30%] p-3 resize-none h-32" placeholder="Build a cat shelter with us"></textarea>
       </div>
       <div class="flex flex-col mt-5 gap-2">
         <label for="date">Add your timeline</label>

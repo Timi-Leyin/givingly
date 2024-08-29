@@ -1,6 +1,16 @@
 <?php
 require_once ('../includes/auth_guard.php');
+require_once('../includes/db_connect.php');
 check_login();
+// id, name, goal, raised, about, timeline, banner
+$q = "SELECT * FROM projects;";
+$result = $conn->query($q);
+
+if ($result->num_rows > 0) {
+    $projects = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $projects = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,110 +71,27 @@ check_login();
   <h1 class="text-3xl font-semibold">Welcome, <?php echo htmlspecialchars($_SESSION['email']); ?>!</h1>
     <h1 class="text-4xl font-semibold">Projects</h1>
     <div class="mt-8 flex flex-wrap justify-around">
-      <a href="./project.php">
-      <div class="w-[400px] cursor-pointer m-10">
-        <img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed">
-        <p class="mt-1 text-center text-2xl p-3">Build a cat shelter with us</p>
-        <div class="w-full bg-gray-200 h-[15px] rounded-xl">
-          <div class="w-[20%] bg-[#D4EE26] h-full rounded-xl"></div>
-        </div>
-        <div class="flex justify-between p-1 mt-2">
-          <div>
-            <p class="text-xl font-bold">Raised:</p>
-            <p class="text-2xl font-semibold">$2500</p>
+    <?php foreach ($projects as $project): ?>
+      <a href="./project.php?id=<?php echo $project['id']; ?>">
+        <div class="w-[400px] cursor-pointer m-10">
+          <img src="<?php echo htmlspecialchars($project['banner']); ?>" class="w-full bg-gray-200 rounded-lg p-3" alt="<?php echo htmlspecialchars($project['name']); ?>">
+          <p class="mt-1 text-center text-2xl p-3"><?php echo htmlspecialchars($project['name']); ?></p>
+          <div class="w-full bg-gray-200 h-[15px] rounded-xl">
+            <div class="w-[<?php echo min(100, ($project['raised'] / $project['goal']) * 100); ?>%] bg-[#D4EE26] h-full rounded-xl"></div>
           </div>
-          <div>
-            <p class="text-xl font-bold">Goal:</p>
-            <p class="text-2xl font-semibold">$11500</p>
+          <div class="flex justify-between p-1 mt-2">
+            <div>
+              <p class="text-xl font-bold">Raised:</p>
+              <p class="text-2xl font-semibold">$<?php echo number_format($project['raised'], 2); ?></p>
+            </div>
+            <div>
+              <p class="text-xl font-bold">Goal:</p>
+              <p class="text-2xl font-semibold">$<?php echo number_format($project['goal'], 2); ?></p>
+            </div>
           </div>
         </div>
-      </div>
       </a>
-      <div class="w-[400px] cursor-pointer m-10">
-        <img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed">
-        <p class="mt-1 text-center text-2xl p-3">Build a cat shelter with us</p>
-        <div class="w-full bg-gray-200 h-[15px] rounded-xl">
-          <div class="w-[20%] bg-[#D4EE26] h-full rounded-xl"></div>
-        </div>
-        <div class="flex justify-between p-1 mt-2">
-          <div>
-            <p class="text-xl font-bold">Raised:</p>
-            <p class="text-2xl font-semibold">$2500</p>
-          </div>
-          <div>
-            <p class="text-xl font-bold">Goal:</p>
-            <p class="text-2xl font-semibold">$11500</p>
-          </div>
-        </div>
-      </div>
-      <div class="w-[400px] cursor-pointer m-10">
-        <img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed">
-        <p class="mt-1 text-center text-2xl p-3">Build a cat shelter with us</p>
-        <div class="w-full bg-gray-200 h-[15px] rounded-xl">
-          <div class="w-[20%] bg-[#D4EE26] h-full rounded-xl"></div>
-        </div>
-        <div class="flex justify-between p-1 mt-2">
-          <div>
-            <p class="text-xl font-bold">Raised:</p>
-            <p class="text-2xl font-semibold">$2500</p>
-          </div>
-          <div>
-            <p class="text-xl font-bold">Goal:</p>
-            <p class="text-2xl font-semibold">$11500</p>
-          </div>
-        </div>
-      </div>
-      <div class="w-[400px] cursor-pointer m-10">
-        <img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed">
-        <p class="mt-1 text-center text-2xl p-3">Build a cat shelter with us</p>
-        <div class="w-full bg-gray-200 h-[15px] rounded-xl">
-          <div class="w-[20%] bg-[#D4EE26] h-full rounded-xl"></div>
-        </div>
-        <div class="flex justify-between p-1 mt-2">
-          <div>
-            <p class="text-xl font-bold">Raised:</p>
-            <p class="text-2xl font-semibold">$2500</p>
-          </div>
-          <div>
-            <p class="text-xl font-bold">Goal:</p>
-            <p class="text-2xl font-semibold">$11500</p>
-          </div>
-        </div>
-      </div>
-      <div class="w-[400px] cursor-pointer m-10">
-        <img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed">
-        <p class="mt-1 text-center text-2xl p-3">Build a cat shelter with us</p>
-        <div class="w-full bg-gray-200 h-[15px] rounded-xl">
-          <div class="w-[20%] bg-[#D4EE26] h-full rounded-xl"></div>
-        </div>
-        <div class="flex justify-between p-1 mt-2">
-          <div>
-            <p class="text-xl font-bold">Raised:</p>
-            <p class="text-2xl font-semibold">$2500</p>
-          </div>
-          <div>
-            <p class="text-xl font-bold">Goal:</p>
-            <p class="text-2xl font-semibold">$11500</p>
-          </div>
-        </div>
-      </div>
-      <div class="w-[400px] cursor-pointer m-10">
-        <img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed">
-        <p class="mt-1 text-center text-2xl p-3">Build a cat shelter with us</p>
-        <div class="w-full bg-gray-200 h-[15px] rounded-xl">
-          <div class="w-[20%] bg-[#D4EE26] h-full rounded-xl"></div>
-        </div>
-        <div class="flex justify-between p-1 mt-2">
-          <div>
-            <p class="text-xl font-bold">Raised:</p>
-            <p class="text-2xl font-semibold">$2500</p>
-          </div>
-          <div>
-            <p class="text-xl font-bold">Goal:</p>
-            <p class="text-2xl font-semibold">$11500</p>
-          </div>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
   </main>
 </body>

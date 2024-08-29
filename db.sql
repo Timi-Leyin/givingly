@@ -8,3 +8,25 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- CREATE TABLE projects (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(255) NOT NULL,
+--     goal DECIMAL(10, 2) NOT NULL,
+--     about TEXT NOT NULL,
+--     date DATE NOT NULL,
+--     banner VARCHAR(255) NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+CREATE TABLE projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    goal DECIMAL(10, 2) NOT NULL,
+    raised DECIMAL(10, 2) DEFAULT 0.00,
+    about TEXT NOT NULL,
+    timeline DATE NOT NULL,
+    banner VARCHAR(255),
+    user_email VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

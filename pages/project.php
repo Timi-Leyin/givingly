@@ -1,6 +1,31 @@
 <?php
 require_once ('../includes/auth_guard.php');
+require_once ('../includes/db_connect.php');
 check_login();
+
+if (isset($_GET['id'])) {
+    $project_id = $_GET['id'];
+
+    // Prepare and execute the query to get project details
+    $q = "SELECT * FROM projects WHERE id = ?";
+    $stmt = $conn->prepare($q);
+    $stmt->bind_param("i", $project_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $project = $result->fetch_assoc();
+    } else {
+      // header("Location: ./404.php");
+        echo "<h2>Project not found.</h2>";
+        exit;
+    }
+
+    $stmt->close();
+} else {
+    echo "No project ID provided.";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,42 +85,40 @@ check_login();
   </header>
   <main class="w-full relative mt-16 p-14">
     <div class="flex">
-        <div class="w-[50%]"><img src="../assets/images/egg.png" class="w-full bg-gray-200 rounded-lg p-3" alt="An egg getting fryed"></div>
+        <div class="w-[50%]">
+          <img  src="<?php echo htmlspecialchars($project['banner']); ?>" class="w-full bg-gray-200 rounded-lg p-3" alt="Project Image">
+        </div>
         <div class="w-[50%] p-5">
-          <h1 class="text-3xl font-bold">Help us release a cookbook for parents and kids</h1>
+          <h1 class="text-3xl font-bold"><?php echo htmlspecialchars($project['name']); ?></h1>
           <div class="mt-3">
-            by shindara@gmail.co
+            by <?php echo htmlspecialchars($project['user_email']); ?>
           </div>
           <div class="flex mt-5">
             <div class="w-[50%] border-y-2 border-r-2 p-3">
               <h3 class="text-xl font-bold">About project</h3>
-              <p class="mt-3 text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga accusamus quaerat reprehenderit architecto nulla esse ab cumque blanditiis beatae laborum, nostrum vero eius maxime. Labore voluptatem repudiandae magnam tenetur reiciendis?</p>
+              <p class="mt-3 text-md"><?php echo nl2br(htmlspecialchars($project['about'])); ?></p>
             </div>
             <div class="w-[50%] border-y-2 border-l-2 p-3">
               <div class="flex justify-between">
                 <div class="p-3">
                   <h6 class="font-black">Raised:</h6>
-                  <p class="text-xl">$2,500</p>
+                  <p class="text-xl">$<?php echo number_format($project['raised'], 2); ?></p>
                 </div>
                 <div class="bg-[#D4EE26] p-3 rounded-lg">
                   <h6 class="font-black">Goal:</h6>
-                  <p class="text-xl">$3,500</p>
+                  <p class="text-xl">$<?php echo number_format($project['goal'], 2); ?></p>
               </div>
               </div>
               <div class="mt-5 w-full bg-gray-200 h-[15px] rounded-xl">
-                <div class="w-[70%] bg-[#D4EE26] h-full rounded-xl"></div>
+                <div class="w-[<?php echo ($project['raised'] / $project['goal']) * 100; ?>%] bg-[#D4EE26] h-full rounded-xl"></div>
               </div>
               <div class="mt-5">
-              <i class="fa-solid fa-calendar-days"></i>18 days left
+              <i class="fa-solid fa-calendar-days"></i> <?php echo htmlspecialchars($project['timeline']); ?> days left
               </div>
             </div>
           </div>
           <button class="mt-3 bg-black p-3 text-white font-bold rounded-md">Fund this project</button>
         </div>
-    </div>
-
-    <div>
-
     </div>
   </main>
 </body>
