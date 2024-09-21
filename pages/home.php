@@ -74,7 +74,7 @@ if ($result->num_rows > 0) {
     <?php foreach ($projects as $project): ?>
       <a href="./project.php?id=<?php echo $project['id']; ?>">
         <div class="w-[400px] cursor-pointer m-10">
-          <img src="<?php echo htmlspecialchars($project['banner']); ?>" class="w-full bg-gray-200 rounded-lg p-3" alt="<?php echo htmlspecialchars($project['name']); ?>">
+          <img src="<?php echo htmlspecialchars($project['banner']); ?>" class="w-full h-[300px] object-cover bg-gray-200 rounded-lg p-3" alt="<?php echo htmlspecialchars($project['name']); ?>">
           <p class="mt-1 text-center text-2xl p-3"><?php echo htmlspecialchars($project['name']); ?></p>
           <div class="w-full bg-gray-200 h-[15px] rounded-xl">
             <div class="w-[<?php echo min(100, ($project['raised'] / $project['goal']) * 100); ?>%] bg-[#D4EE26] h-full rounded-xl"></div>
@@ -82,11 +82,11 @@ if ($result->num_rows > 0) {
           <div class="flex justify-between p-1 mt-2">
             <div>
               <p class="text-xl font-bold">Raised:</p>
-              <p class="text-2xl font-semibold">$<?php echo number_format($project['raised'], 2); ?></p>
+              <p class="text-2xl font-semibold">₦<?php echo number_format($project['raised'], 2); ?></p>
             </div>
             <div>
               <p class="text-xl font-bold">Goal:</p>
-              <p class="text-2xl font-semibold">$<?php echo number_format($project['goal'], 2); ?></p>
+              <p class="text-2xl font-semibold">₦<?php echo number_format($project['goal'], 2); ?></p>
             </div>
           </div>
         </div>
